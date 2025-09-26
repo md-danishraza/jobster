@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/features/userSlice";
+import { addUserToLocalStorage } from "../utils/localStorage";
 function Register() {
   const initialState = {
     name: "",
@@ -26,8 +27,8 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser, { isLoading }] = useLoginUserMutation();
-  const [registerUser, { isRegLoading }] = useRegisterUserMutation();
-  const [registerTestUser, { isRegTestLoading }] =
+  const [registerUser, { isLoading: isRegLoading }] = useRegisterUserMutation();
+  const [registerTestUser, { isLoading: isRegTestLoading }] =
     useRegisterTestUserMutation();
 
   const handleChange = (e) => {
@@ -52,6 +53,7 @@ function Register() {
           password: values.password,
         }).unwrap();
         dispatch(setUser(response.user));
+        addUserToLocalStorage(response.user);
         return navigate("/");
       } catch (err) {
         console.error("Login failed:", err);
@@ -65,6 +67,7 @@ function Register() {
         password: values.password,
       }).unwrap();
       dispatch(setUser(response.user));
+      addUserToLocalStorage(response.user);
       return navigate("/");
     } catch (err) {
       console.error("register failed:", err);
