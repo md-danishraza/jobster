@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserFromLocalStorage } from "../../utils/localStorage";
+import {
+  getUserFromLocalStorage,
+  removeUserFromLocalStorage,
+} from "../../utils/localStorage";
+
 const initialState = {
   user: getUserFromLocalStorage(),
+  isSidebarOpen: false,
 };
 
 const userSlice = createSlice({
@@ -13,10 +18,15 @@ const userSlice = createSlice({
     },
     clearUser: (state) => {
       state.user = null;
+      state.isSidebarOpen = false;
+      removeUserFromLocalStorage();
+    },
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
     },
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, toggleSidebar } = userSlice.actions;
 
 export default userSlice.reducer;

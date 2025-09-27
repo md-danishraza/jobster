@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.nav`
   height: var(--nav-height);
@@ -42,7 +42,7 @@ const Wrapper = styled.nav`
   .dropdown {
     position: absolute;
     top: 40px;
-    left: 0;
+    right: 0;
     width: 100%;
     background: var(--primary-100);
     box-shadow: var(--shadow-2);
@@ -80,5 +80,5 @@ const Wrapper = styled.nav`
       display: block;
     }
   }
-`
-export default Wrapper
+`;
+export default Wrapper;

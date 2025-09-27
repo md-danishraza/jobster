@@ -79,6 +79,7 @@ function Register() {
     try {
       const response = await registerTestUser().unwrap();
       dispatch(setUser(response.user));
+      addUserToLocalStorage(response.user);
       return navigate("/");
     } catch (err) {
       console.error("Login failed:", err);
