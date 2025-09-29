@@ -3,7 +3,7 @@ import { axiosBaseQuery } from "./baseQuery";
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: axiosBaseQuery,
+  baseQuery: axiosBaseQuery(),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (userData) => ({
@@ -40,4 +40,5 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useRegisterTestUserMutation,
+  useUpdateUserMutation,
 } = userApi;

@@ -63,6 +63,7 @@ function Register() {
     // if not a member then register
     try {
       const response = await registerUser({
+        name: values.name,
         email: values.email,
         password: values.password,
       }).unwrap();
