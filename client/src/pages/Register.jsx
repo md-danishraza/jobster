@@ -24,8 +24,17 @@ function Register() {
   };
   const [values, setValues] = useState(initialState);
 
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // if user already exist no need to show this page
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const [registerUser, { isLoading: isRegLoading }] = useRegisterUserMutation();
   const [registerTestUser, { isLoading: isRegTestLoading }] =
