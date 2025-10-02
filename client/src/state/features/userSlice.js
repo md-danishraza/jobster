@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.user = null;
       state.isSidebarOpen = false;
+      toast.success("Logged Out Successfully!");
       removeUserFromLocalStorage();
     },
     toggleSidebar: (state) => {

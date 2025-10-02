@@ -63,6 +63,7 @@ function Register() {
         }).unwrap();
         dispatch(setUser(response.user));
         addUserToLocalStorage(response.user);
+        toast.success(`Welcome Back ${response.user.name}`);
         return navigate("/");
       } catch (err) {
         console.error("Login failed:", err);
@@ -78,6 +79,7 @@ function Register() {
       }).unwrap();
       dispatch(setUser(response.user));
       addUserToLocalStorage(response.user);
+      toast.success(`Welcome Aboard ${response.user.name}`);
       return navigate("/");
     } catch (err) {
       console.error("register failed:", err);
@@ -139,7 +141,7 @@ function Register() {
         </button>
         <button
           className="btn btn-block"
-          disabled={isRegTestLoading}
+          disabled={isRegTestLoading || isLoading}
           onClick={registerTest}
           type="button"
         >

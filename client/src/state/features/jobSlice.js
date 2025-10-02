@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { getUserFromLocalStorage } from "../../utils/localStorage";
 const initialState = {
   position: "",
   company: "",
@@ -15,7 +15,18 @@ const initialState = {
 const jobSlice = createSlice({
   name: "job",
   initialState,
-  reducers: {},
+  reducers: {
+    handleChange: (state, { payload: { name, value } }) => {
+      // directly mutating (redux will handle)
+      state[name] = value;
+    },
+    clearValues: (state) => {
+      return {
+        ...initialState,
+        jobLocation: getUserFromLocalStorage()?.location || "",
+      };
+    },
+  },
 });
-
+export const { handleChange, clearValues } = jobSlice.actions;
 export default jobSlice.reducer;

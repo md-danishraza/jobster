@@ -4,7 +4,23 @@ import { axiosBaseQuery } from "./baseQuery";
 export const jobsApi = createApi({
   reducerPath: "jobsApi",
   baseQuery: axiosBaseQuery(),
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({
+    createJob: builder.mutation({
+      query: (jobData) => ({
+        // { position:'position', company:'company', jobLocation:'location', jobType:'full-time', status:'pending' }
+        url: "/jobs",
+        method: "POST",
+        data: jobData,
+      }),
+      invalidatesTags: ["get-all-jobs"],
+    }),
+    getAllJobs: builder.query({
+      query: () => ({
+        url: "/jobs",
+      }),
+      providesTags: ["get-all-jobs"],
+    }),
+  }),
 });
 
-export const {} = jobsApi;
+export const { useCreateJobMutation, useGetAllJobsQuery } = jobsApi;
