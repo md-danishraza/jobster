@@ -4,8 +4,15 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import FormRowSelect from "../../components/FormRowSelect";
-import { clearValues, handleChange } from "../../state/features/jobSlice";
-import { useCreateJobMutation } from "../../state/apis/jobsApi";
+import {
+  clearValues,
+  handleChange,
+  setEditJob,
+} from "../../state/features/jobSlice";
+import {
+  useCreateJobMutation,
+  useUpdateJobMutation,
+} from "../../state/apis/jobsApi";
 import { useNavigate } from "react-router-dom";
 
 function AddJob() {
@@ -25,16 +32,17 @@ function AddJob() {
   // add default joblocation from user state
   useEffect(() => {
     if (!isEditing) {
+      dispatch(clearValues());
       dispatch(handleChange({ name: "jobLocation", value: user.location }));
     }
-  }, []);
+  }, [isEditing]);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const [createJob, { isLoading }] = useCreateJobMutation();
-
+  const [updateJob, { isLoading: updateLoading }] = useUpdateJobMutation();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,15 +50,49 @@ function AddJob() {
       toast.error("Please Fill Out All Fields");
       return;
     }
-
-    try {
-      await createJob({ position, company, jobLocation, jobType, status });
-      // clear value
-      dispatch(clearValues());
-      toast.success("job created successfully!");
-      navigate("/all-jobs");
-    } catch (error) {
-      console.log("error in creating job");
+    // for creating new job
+    if (!isEditing) {
+      try {
+        const response = await createJob({
+          position,
+          company,
+          jobLocation,
+          jobType,
+          status,
+        });
+        if (response.data.status !== 400) {
+          // clear value
+          dispatch(clearValues());
+          toast.success("job created successfully!");
+          navigate("/all-jobs");
+        }
+      } catch (error) {
+        console.log("error in creating job");
+      }
+    }
+    // for editing existing job
+    if (isEditing) {
+      try {
+        const response = await updateJob({
+          jobId: editJobId,
+          jobData: {
+            position,
+            company,
+            jobLocation,
+            jobType,
+            status,
+          },
+        });
+        // console.log(response.data);
+        // update with new edit value
+        if (response.data.status !== 400) {
+          const job = response.data.job;
+          dispatch(setEditJob({ editJobId: job._id, ...job }));
+          toast.success("job updated successfully!");
+        }
+      } catch (error) {
+        console.log("error in creating job");
+      }
     }
   };
   const handleJobInput = (e) => {
@@ -119,9 +161,9 @@ function AddJob() {
               type="submit"
               className="btn btn-block submit-btn"
               onClick={handleSubmit}
-              disabled={isLoading}
+              disabled={isLoading || updateLoading}
             >
-              {isLoading ? "submitting" : "submit"}
+              {isLoading || updateLoading ? "submitting" : "submit"}
             </button>
           </div>
         </div>

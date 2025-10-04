@@ -20,7 +20,27 @@ export const jobsApi = createApi({
       }),
       providesTags: ["get-all-jobs"],
     }),
+    deleteJob: builder.mutation({
+      query: (jobId) => ({
+        url: `/jobs/${jobId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["get-all-jobs"],
+    }),
+    updateJob: builder.mutation({
+      query: ({ jobId, jobData }) => ({
+        url: `/jobs/${jobId}`,
+        method: "PATCH",
+        data: jobData,
+      }),
+      invalidatesTags: ["get-all-jobs"],
+    }),
   }),
 });
 
-export const { useCreateJobMutation, useGetAllJobsQuery } = jobsApi;
+export const {
+  useCreateJobMutation,
+  useGetAllJobsQuery,
+  useDeleteJobMutation,
+  useUpdateJobMutation,
+} = jobsApi;

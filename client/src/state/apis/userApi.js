@@ -14,11 +14,18 @@ export const userApi = createApi({
     }),
     registerTestUser: builder.mutation({
       query: () => ({
-        url: "/auth/testingRegister",
+        url: "/auth/login",
         method: "POST",
-        data: { name: "john", email: "john@gmail.com", password: "secret" },
+        data: { email: "testUser@test.com", password: "secret" },
       }),
     }),
+    // registerTestUser: builder.mutation({
+    //   query: () => ({
+    //     url: "/auth/testingRegister",
+    //     method: "POST",
+    //     data: { name: "john", email: "john@gmail.com", password: "secret" },
+    //   }),
+    // }),
     loginUser: builder.mutation({
       query: (credentials) => ({
         url: "/auth/login",

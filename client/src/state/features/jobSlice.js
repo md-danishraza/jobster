@@ -26,7 +26,10 @@ const jobSlice = createSlice({
         jobLocation: getUserFromLocalStorage()?.location || "",
       };
     },
+    setEditJob: (state, { payload }) => {
+      return { ...state, isEditing: true, ...payload };
+    },
   },
 });
-export const { handleChange, clearValues } = jobSlice.actions;
+export const { handleChange, clearValues, setEditJob } = jobSlice.actions;
 export default jobSlice.reducer;

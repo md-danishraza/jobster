@@ -9,12 +9,12 @@ import { setAllJobs } from "../state/features/allJobsSlice";
 function JobsContainer() {
   const { jobs } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetAllJobsQuery();
+  const { data, error, isLoading, refetch } = useGetAllJobsQuery();
 
   //   fetch jobs on initial render
   useEffect(() => {
     if (data?.jobs) {
-      //   console.log(data);
+      // console.log(data);
       dispatch(setAllJobs({ jobs: data.jobs }));
     }
   }, [data]);
@@ -36,7 +36,7 @@ function JobsContainer() {
       <h5>jobs info</h5>
       <div className="jobs">
         {jobs.map((job) => {
-          return <Job key={job._id} {...job} />;
+          return <Job key={job._id} {...job} refetch={refetch} />;
         })}
       </div>
     </Wrapper>
