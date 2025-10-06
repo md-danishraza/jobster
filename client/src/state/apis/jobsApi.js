@@ -35,6 +35,11 @@ export const jobsApi = createApi({
       }),
       invalidatesTags: ["get-all-jobs"],
     }),
+    showStats: builder.query({
+      query: () => ({
+        url: "/jobs/stats",
+      }),
+    }),
   }),
 });
 
@@ -43,4 +48,5 @@ export const {
   useGetAllJobsQuery,
   useDeleteJobMutation,
   useUpdateJobMutation,
+  useShowStatsQuery,
 } = jobsApi;

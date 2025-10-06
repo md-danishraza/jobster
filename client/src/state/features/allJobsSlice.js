@@ -25,8 +25,12 @@ const allJobsSlice = createSlice({
     setAllJobs: (state, { payload }) => {
       state.jobs = payload.jobs;
     },
+    setStats: (state, { payload }) => {
+      state.stats = payload.defaultStats;
+      state.monthlyApplications = payload.monthlyApplications;
+    },
   },
 });
 
-export const { setAllJobs } = allJobsSlice.actions;
+export const { setAllJobs, setStats } = allJobsSlice.actions;
 export default allJobsSlice.reducer;
