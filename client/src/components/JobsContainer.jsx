@@ -5,7 +5,7 @@ import Wrapper from "../assets/wrappers/JobsContainer";
 import Job from "./Job";
 import Loading from "./Loading";
 import { useGetAllJobsQuery } from "../state/apis/jobsApi";
-import { setAllJobs } from "../state/features/allJobsSlice";
+import { setAllJobs } from "../state/features/AllJobsSlice";
 function JobsContainer() {
   const { jobs } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function JobsContainer() {
   useEffect(() => {
     if (data?.jobs) {
       // console.log(data);
-      dispatch(setAllJobs({ jobs: data.jobs }));
+      dispatch(setAllJobs({ data }));
     }
   }, [data]);
 

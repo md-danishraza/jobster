@@ -12,7 +12,7 @@ function Stats() {
   const dispatch = useDispatch();
   //   fetch jobs on initial render
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (data) {
       dispatch(setStats(data));
     }
