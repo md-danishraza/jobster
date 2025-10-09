@@ -6,18 +6,20 @@ import Job from "./Job";
 import Loading from "./Loading";
 import { useGetAllJobsQuery } from "../state/apis/jobsApi";
 import { setAllJobs } from "../state/features/AllJobsSlice";
+import PageBtnContainer from "./PageBtnContainer";
 function JobsContainer() {
-  const { jobs } = useSelector((store) => store.allJobs);
+  const { jobs, page, totalJobs, numOfPages } = useSelector(
+    (store) => store.allJobs
+  );
   const dispatch = useDispatch();
   const { data, error, isLoading, refetch } = useGetAllJobsQuery();
 
   //   fetch jobs on initial render
   useEffect(() => {
-    if (data?.jobs) {
-      // console.log(data);
+    if (!isLoading && data?.jobs?.length) {
       dispatch(setAllJobs({ data }));
     }
-  }, [data]);
+  }, [isLoading, data]);
 
   if (isLoading) {
     return <Loading center={true} />;
@@ -33,12 +35,16 @@ function JobsContainer() {
 
   return (
     <Wrapper>
-      <h5>jobs info</h5>
+      <h5>
+        {totalJobs} job{jobs.length > 1 && "s"} found
+      </h5>
       <div className="jobs">
         {jobs.map((job) => {
           return <Job key={job._id} {...job} refetch={refetch} />;
         })}
       </div>
+      {/* if total num of pages is > 1 */}
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 }

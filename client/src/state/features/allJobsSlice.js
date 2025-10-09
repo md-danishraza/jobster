@@ -23,7 +23,6 @@ const allJobsSlice = createSlice({
   initialState,
   reducers: {
     setAllJobs: (state, { payload: { data } }) => {
-      // console.log(data);
       state.jobs = data.jobs;
       state.numOfPages = data.numOfPages;
       state.totalJobs = data.totalJobs;
@@ -39,10 +38,17 @@ const allJobsSlice = createSlice({
     clearFilters: (state) => {
       return { ...state, ...initialFiltersState };
     },
-    updateFileredJob: (state) => {},
+    changePage: (state, { payload }) => {
+      state.page = payload;
+    },
   },
 });
 
-export const { setAllJobs, setStats, handleFilterChange, clearFilters } =
-  allJobsSlice.actions;
+export const {
+  setAllJobs,
+  setStats,
+  handleFilterChange,
+  clearFilters,
+  changePage,
+} = allJobsSlice.actions;
 export default allJobsSlice.reducer;
