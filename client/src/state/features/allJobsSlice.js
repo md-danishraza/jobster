@@ -32,12 +32,14 @@ const allJobsSlice = createSlice({
       state.monthlyApplications = payload.monthlyApplications;
     },
     handleFilterChange: (state, { payload: { name, value } }) => {
-      // state.page = 1;
+      // change in filters then set page to 1
+      state.page = 1;
       state[name] = value;
     },
     clearFilters: (state) => {
       return { ...state, ...initialFiltersState };
     },
+    clearAllJobsState: () => initialState,
     changePage: (state, { payload }) => {
       state.page = payload;
     },
@@ -50,5 +52,6 @@ export const {
   handleFilterChange,
   clearFilters,
   changePage,
+  clearAllJobsState,
 } = allJobsSlice.actions;
 export default allJobsSlice.reducer;

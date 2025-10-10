@@ -6,6 +6,8 @@ import { FaAlignLeft, FaUserCircle, FaCaretDown, FaHome } from "react-icons/fa";
 import Logo from "./Logo";
 import { clearUser, toggleSidebar } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { clearValues } from "../state/features/jobSlice";
+import { clearAllJobsState } from "../state/features/AllJobsSlice";
 function Navbar() {
   const { user } = useSelector((store) => store.user);
   // toggle dropdown
@@ -13,6 +15,13 @@ function Navbar() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearUser());
+    dispatch(clearValues());
+    dispatch(clearAllJobsState());
+    navigate("/landing");
+  };
   return (
     <Wrapper>
       <div className="nav-center">
@@ -41,10 +50,7 @@ function Navbar() {
             <button
               type="button"
               className="dropdown-btn"
-              onClick={() => {
-                dispatch(clearUser());
-                navigate("/landing");
-              }}
+              onClick={handleLogout}
             >
               logout
             </button>

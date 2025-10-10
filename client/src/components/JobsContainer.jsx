@@ -7,12 +7,29 @@ import Loading from "./Loading";
 import { useGetAllJobsQuery } from "../state/apis/jobsApi";
 import { setAllJobs } from "../state/features/AllJobsSlice";
 import PageBtnContainer from "./PageBtnContainer";
+import { useDebouncedValue } from "../state/hooks";
 function JobsContainer() {
-  const { jobs, page, totalJobs, numOfPages } = useSelector(
-    (store) => store.allJobs
-  );
+  const {
+    jobs,
+    page,
+    totalJobs,
+    numOfPages,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
-  const { data, error, isLoading, refetch } = useGetAllJobsQuery();
+  // debouncing search filter to prevent useless request
+  const debouncedSearch = useDebouncedValue(search, 1000);
+  // passing filters as query params so it automatically refetches when query state changes
+  const { data, error, isLoading, refetch } = useGetAllJobsQuery({
+    page,
+    debouncedSearch,
+    searchStatus,
+    searchType,
+    sort,
+  });
 
   //   fetch jobs on initial render
   useEffect(() => {

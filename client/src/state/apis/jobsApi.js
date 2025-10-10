@@ -15,9 +15,19 @@ export const jobsApi = createApi({
       invalidatesTags: ["get-all-jobs"],
     }),
     getAllJobs: builder.query({
-      query: () => ({
-        url: "/jobs",
-      }),
+      query: ({
+        page,
+        debouncedSearch: search,
+        searchStatus,
+        searchType,
+        sort,
+      }) => {
+        let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+        if (search) {
+          url += `&search=${search}`;
+        }
+        return { url };
+      },
       providesTags: ["get-all-jobs"],
     }),
     deleteJob: builder.mutation({
