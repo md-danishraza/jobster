@@ -5,7 +5,7 @@ import ChartsContainer from "../../components/ChartsContainer";
 import { useEffect } from "react";
 import Loading from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { setStats } from "../../state/features/AllJobsSlice";
+import { setStats } from "../../state/features/allJobSlice.js";
 function Stats() {
   const { data, isLoading, error } = useShowStatsQuery();
   const { monthlyApplications } = useSelector((state) => state.allJobs);
