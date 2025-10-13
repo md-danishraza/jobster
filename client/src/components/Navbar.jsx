@@ -7,7 +7,7 @@ import Logo from "./Logo";
 import { clearUser, toggleSidebar } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { clearValues } from "../state/features/jobSlice";
-import { clearAllJobsState } from "../state/features/AllJobsSlice";
+import { clearAllJobsState } from "../state/features/allJobsSlice";
 function Navbar() {
   const { user } = useSelector((store) => store.user);
   // toggle dropdown

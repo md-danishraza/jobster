@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   handleFilterChange,
   clearFilters,
-} from "../state/features/AllJobsSlice";
+} from "../state/features/allJobsSlice";
 function SearchContainer() {
   // searchStatus = job status value
   // searchType = job type value

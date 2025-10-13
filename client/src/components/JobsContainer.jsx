@@ -5,7 +5,7 @@ import Wrapper from "../assets/wrappers/JobsContainer";
 import Job from "./Job";
 import Loading from "./Loading";
 import { useGetAllJobsQuery } from "../state/apis/jobsApi";
-import { setAllJobs } from "../state/features/AllJobsSlice";
+import { setAllJobs } from "../state/features/allJobsSlice";
 import PageBtnContainer from "./PageBtnContainer";
 import { useDebouncedValue } from "../state/hooks";
 function JobsContainer() {

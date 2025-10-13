@@ -2,7 +2,7 @@ import React from "react";
 import Wrapper from "../assets/wrappers/PageBtnContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
-import { changePage } from "../state/features/AllJobsSlice";
+import { changePage } from "../state/features/allJobsSlice";
 function PageBtnContainer() {
   const { numOfPages, page } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
