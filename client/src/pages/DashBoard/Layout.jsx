@@ -4,6 +4,7 @@ import BigSidebar from "../../components/BigSidebar";
 import Navbar from "../../components/Navbar";
 import Wrapper from "../../assets/wrappers/SharedLayout";
 import { Outlet } from "react-router-dom";
+import Footer from "../../components/Footer";
 function Layout() {
   return (
     <>
@@ -16,6 +17,7 @@ function Layout() {
             <div className="dashboard-page">
               <Outlet />
             </div>
+            <Footer />
           </div>
         </main>
       </Wrapper>

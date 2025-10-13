@@ -16,7 +16,10 @@ export const userApi = createApi({
       query: () => ({
         url: "/auth/login",
         method: "POST",
-        data: { email: "testUser@test.com", password: "secret" },
+        data: {
+          email: "md.danish0raza@gmail.com",
+          password: "md.danish0raza@gmail.com",
+        },
       }),
     }),
     // registerTestUser: builder.mutation({
