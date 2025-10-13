@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   .dashboard {
@@ -15,8 +15,11 @@ const Wrapper = styled.section`
       grid-template-columns: auto 1fr;
     }
     .dashboard-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       width: 90%;
     }
   }
-`
-export default Wrapper
+`;
+export default Wrapper;

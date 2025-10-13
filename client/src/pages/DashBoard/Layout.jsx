@@ -16,8 +16,8 @@ function Layout() {
             <Navbar />
             <div className="dashboard-page">
               <Outlet />
+              <Footer />
             </div>
-            <Footer />
           </div>
         </main>
       </Wrapper>
